@@ -14,7 +14,7 @@
     </form>
 
     <a class="findPasswordButton">비밀번호 찾기</a>
-    <button type="submit" class="loginButton" @click="checkForm">
+    <button type="submit" class="loginButton" @click="login">
       로그인
     </button>
     <p class="registerText">
@@ -30,9 +30,12 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 import Title from "@/components/user/title.vue";
 import "@/components/css/user/user.scss";
 import "@/components/css/user/login.scss";
+
+axios.defaults.baseURL = "http://i4a202.p.ssafy.io:8080";
 
 export default {
   name: "Login",
@@ -41,8 +44,8 @@ export default {
   },
   data: () => {
     return {
-      email: "",
-      password: "",
+      email: "sha256@naver.com",
+      password: "1234",
       validateEmail: false,
       validatePassword: false,
     };
@@ -68,9 +71,30 @@ export default {
       );
     },
     checkForm() {
-      if (this.validateEmail && this.validatePassword) {
+      if (this.validateEmail && !this.validatePassword) {
         return true;
       }
+    },
+    login() {
+      if (this.checkForm) {
+        axios({
+          url: "/user",
+          method: "GET",
+          params: {
+            userEmail: this.email,
+            userPassword: this.password,
+          },
+        })
+          .then((res) => {
+            console.log(res.data);
+          })
+
+          .catch((error) => {
+            console.error(error);
+          });
+        return;
+      }
+      console.log("조건 ㄴㄴ");
     },
   },
 };
