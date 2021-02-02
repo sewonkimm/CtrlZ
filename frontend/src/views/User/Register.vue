@@ -33,14 +33,18 @@
         </div>
       </form>
 
-      <button type="submit" class="registerButton" @click="checkForm">
+      <button type="submit" class="registerButton" @click="register">
         회원가입
       </button>
     </div>
   </div>
 </template>
 <script>
+import axios from "axios";
 import Title from "@/components/user/title.vue";
+
+axios.defaults.baseURL = "http://i4a202.p.ssafy.io:8080";
+axios.defaults.headers.post["Content-Type"] = "application/json";
 
 export default {
   name: "Register",
@@ -86,10 +90,33 @@ export default {
       );
     },
     checkForm() {
-      //   if (this.validateUserName && this.validateUserEmail && this.validateUserPassword) {
-      this.registerSuccess = true;
-      return true;
-      //   }
+      if (
+        this.validateUserName &&
+        this.validateUserEmail &&
+        this.validateUserPassword &&
+        this.password === this.passwordConfirm
+      ) {
+        return true;
+      }
+    },
+    register() {
+      if (this.checkForm) {
+        axios({
+          url: "/user",
+          method: "POST",
+          data: {
+            userName: this.userName,
+            userEmail: this.userEmail,
+            userPassword: this.userPassword,
+          },
+        })
+          .then(() => {
+            this.registerSuccess = true;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
     },
   },
 };
