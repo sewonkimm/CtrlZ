@@ -44,8 +44,8 @@ export default {
   },
   data: () => {
     return {
-      email: "sha256@naver.com",
-      password: "1234",
+      email: "",
+      password: "",
       validateEmail: false,
       validatePassword: false,
     };
@@ -71,7 +71,7 @@ export default {
       );
     },
     checkForm() {
-      if (this.validateEmail && !this.validatePassword) {
+      if (this.validateEmail && this.validatePassword) {
         return true;
       }
     },
@@ -86,15 +86,16 @@ export default {
           },
         })
           .then((res) => {
-            console.log(res.data);
+            const token = res.data.accesstoken;
+            this.$store.commit("LOGIN", token);
+            this.$router.push("/");
           })
-
           .catch((error) => {
             console.error(error);
           });
         return;
       }
-      console.log("조건 ㄴㄴ");
+      console.log("로그인 실패");
     },
   },
 };
