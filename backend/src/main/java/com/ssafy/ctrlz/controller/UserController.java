@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.ssafy.ctrlz.model.User;
-import com.ssafy.ctrlz.repository.UserRepository;
 import com.ssafy.ctrlz.service.JwtService;
 import com.ssafy.ctrlz.service.UserService;
 import io.swagger.annotations.Api;
