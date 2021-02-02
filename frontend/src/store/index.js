@@ -19,5 +19,8 @@ export default new Vuex.Store({
       const user = jwtDecode(token).user;
       state.userInfo = user;
     },
+    LOGOUT: (state) => {
+      state.userInfo = {};
+    },
   },
 });
