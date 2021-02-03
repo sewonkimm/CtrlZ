@@ -13,7 +13,9 @@
       </div>
     </form>
 
-    <a class="findPasswordButton">비밀번호 찾기</a>
+    <router-link to="find" class="toFindButton">
+      비밀번호 찾기
+    </router-link>
     <button type="submit" class="loginButton" @click="login">
       로그인
     </button>
