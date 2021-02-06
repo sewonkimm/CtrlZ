@@ -6,6 +6,9 @@ import ChallengeDetail from "@/views/challenge/ChallengeDetail.vue";
 import Login from "../views/User/Login.vue";
 import Register from "../views/User/Register.vue";
 import FindPassword from "../views/User/FindPassword.vue";
+import ZbtiIntro from "../views/Zbti/ZbtiIntro.vue";
+import ZbtiTest from "../views/Zbti/ZbtiTest.vue";
+import ZbtiResult from "../views/Zbti/ZbtiResult.vue";
 
 Vue.use(VueRouter);
 
@@ -39,6 +42,22 @@ const routes = [
     path: "/find",
     name: "FindPassword",
     component: FindPassword,
+  },
+  {
+    path: "/zbti",
+    name: "ZbtiIntro",
+    component: ZbtiIntro,
+  },
+  {
+    path: "/zbti/test",
+    name: "ZbtiTest",
+    component: ZbtiTest,
+  },
+  {
+    path: "/zbti/result",
+    name: "ZbtiResult",
+    component: ZbtiResult,
+    props: true,
   },
 ];
 
