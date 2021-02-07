@@ -4,12 +4,19 @@
       <p>당신은</p>
       {{ zbtiResult.zbtiName }}
     </div>
-    <img src="@/assets/zbti_example.jpg" class="result" />
+    <img src="@/assets/zbti_example.jpg" class="resultImage" />
     <div class="title">
       <span>추천 챌린지 영역 #</span>
       {{ zbtiResult.zbtiType }}
     </div>
-    <div class="description" v-html="zbtiResult.zbtiDescription"></div>
+    <div class="description">
+      {{ zbtiResult.zbtiDescription[0] }}
+      <div class="highlightWrapper">
+        <div class="highlight"></div>
+        <span>{{ zbtiResult.zbtiDescription[1] }}</span>
+      </div>
+      {{ zbtiResult.zbtiDescription[2] }}
+    </div>
     <router-link to="/" tag="button" class="startButton">
       챌린지 하러 가기
     </router-link>
@@ -20,12 +27,18 @@
 import axios from "axios";
 import "@/components/css/zbti/index.scss";
 
+axios.defaults.baseURL = "https://i4a202.p.ssafy.io:8888";
+
 export default {
   name: "ZbtiResult",
   data: () => {
     return {
       zbtiId: "",
-      zbtiResult: "",
+      zbtiResult: {
+        zbtiType: "",
+        zbtiName: "",
+        zbtiDescription: [],
+      },
     };
   },
   created() {
@@ -40,12 +53,7 @@ export default {
     })
       .then((response) => {
         this.zbtiResult = response.data;
-
-        this.zbtiResult.zbtiDescription = this.zbtiResult.zbtiDescription
-          .split("\n")
-          .join("<br />");
-        this.zbtiResult.zbtiDescription = this.zbtiResult.zbtiDescription.split("\b").join("<b>");
-        this.zbtiResult.zbtiDescription = this.zbtiResult.zbtiDescription.split("/b").join("</b>");
+        this.zbtiResult.zbtiDescription = this.zbtiResult.zbtiDescription.split("\b");
       })
       .catch((error) => {
         console.error(error);
