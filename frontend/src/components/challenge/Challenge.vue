@@ -14,10 +14,6 @@
         {{ participants }}
       </p>
     </div>
-
-    <h4 class="description">
-      {{ description }}
-    </h4>
   </div>
 </template>
 
@@ -37,12 +33,12 @@ export default {
       default: "",
       required: false,
     },
-    participants: {
+    done: {
       type: String,
       default: "",
       required: false,
     },
-    description: {
+    participants: {
       type: String,
       default: "",
       required: false,
