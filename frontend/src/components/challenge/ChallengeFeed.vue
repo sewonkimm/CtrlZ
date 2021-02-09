@@ -1,18 +1,19 @@
 <template>
   <div class="challengeFeed">
-    <div class="feedContents"></div>
-    <div class="feedContents"></div>
-    <div class="feedContents"></div>
-    <div class="feedContents"></div>
-    <div class="feedContents"></div>
-    <div class="feedContents"></div>
-    <div class="feedContents"></div>
-    <div class="feedContents"></div>
-    <div class="feedContents"></div>
+    <div v-for="(image, index) in images" :key="index" class="feed">
+      <img :src="image" />
+    </div>
   </div>
 </template>
 
 <script>
-import "@/components/css/challenge/challengeDetail.scss";
-export default {};
+export default {
+  name: "ChallengeFeed",
+  props: {
+    images: {
+      type: Array,
+      required: true,
+    },
+  },
+};
 </script>
