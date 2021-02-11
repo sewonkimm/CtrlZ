@@ -6,7 +6,7 @@
           일상
         </p>
         <p class="total">
-          3
+          {{ challengeType1.length }}
         </p>
       </div>
     </div>
@@ -16,7 +16,7 @@
           음식
         </p>
         <p class="total">
-          2
+          {{ challengeType2.length }}
         </p>
       </div>
     </div>
@@ -26,7 +26,7 @@
           패션
         </p>
         <p class="total">
-          1
+          {{ challengeType3.length }}
         </p>
       </div>
     </div>
@@ -36,7 +36,7 @@
           활동
         </p>
         <p class="total">
-          1
+          {{ challengeType4.length }}
         </p>
       </div>
     </div>
@@ -44,7 +44,44 @@
 </template>
 <script>
 import "@/components/css/challenge/categories.scss";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://i4a202.p.ssafy.io:8888";
 export default {
   name: "Categories",
+  data: () => {
+    return {
+      challengeType1: [],
+      challengeType2: [],
+      challengeType3: [],
+      challengeType4: [],
+    };
+  },
+  created() {
+    axios({
+      url: "/challenge/type?challengeType=일상",
+      method: "GET",
+    }).then((res) => {
+      this.challengeType1 = res.data;
+    });
+    axios({
+      url: "/challenge/type?challengeType=음식",
+      method: "GET",
+    }).then((res) => {
+      this.challengeType2 = res.data;
+    });
+    axios({
+      url: "/challenge/type?challengeType=패션",
+      method: "GET",
+    }).then((res) => {
+      this.challengeType3 = res.data;
+    });
+    axios({
+      url: "/challenge/type?challengeType=활동",
+      method: "GET",
+    }).then((res) => {
+      this.challengeType4 = res.data;
+    });
+  },
 };
 </script>

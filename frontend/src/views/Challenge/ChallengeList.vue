@@ -6,10 +6,10 @@
     <Categories />
     <div class="challengeContainer">
       <div v-for="(challenge, index) in challenges" :key="index" class="challenge">
-        <img src="@/assets/mission.png" class="thumbnail" />
+        <img :src="challenge.challengeImage" class="thumbnail" />
 
         <p class="category">
-          <span>#{{ challenge.level }}</span>
+          <span>#{{ challenge.levelId }}</span>
           <span>#{{ challenge.challengeType }}</span>
         </p>
         <p class="challengeName">
@@ -28,7 +28,9 @@ import Header from "@/components/common/Header.vue";
 import Navigation from "@/components/common/Navigation.vue";
 import Categories from "@/components/challenge/Categories.vue";
 import "@/components/css/challenge/index.scss";
-import "@/components/css/challenge/challenge.scss";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://i4a202.p.ssafy.io:8888";
 
 export default {
   name: "ChallengeList",
@@ -39,21 +41,16 @@ export default {
   },
   data: () => {
     return {
-      challenges: [
-        {
-          level: "입문",
-          challengeType: "생활",
-          challengeName: "시작이 반이다",
-          participants: 13723,
-        },
-        {
-          level: "고급",
-          challengeType: "생활",
-          challengeName: "플라스틱 다이어트",
-          participants: 2988,
-        },
-      ],
+      challenges: [],
     };
+  },
+  created() {
+    axios({
+      url: "/challenge/all",
+      method: "GET",
+    }).then((res) => {
+      this.challenges = res.data;
+    });
   },
 };
 </script>
