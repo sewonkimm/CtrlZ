@@ -18,4 +18,6 @@ public interface ChallengeStatusService {
 
 	long countByChallenge(String challengeId);
 
+	long countAchivedByChallenge(String challengeId);
+
 }
