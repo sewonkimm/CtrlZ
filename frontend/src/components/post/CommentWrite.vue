@@ -2,7 +2,7 @@
   <div class="commentWrite">
     <img :src="require('@/assets/' + userImage)" class="userImage" />
     <input v-model="comment" type="text" class="comment" placeholder="댓글 남기기..." />
-    <button class="uploadComment" @click="handleUploadClick">
+    <button class="uploadComment" @click="handleCommentUploadClick">
       게시
     </button>
   </div>
@@ -23,7 +23,7 @@ export default {
     this.userImage = this.$store.state.userInfo.userImage;
   },
   methods: {
-    handleUploadClick() {
+    handleCommentUploadClick() {
       console.log("댓글 업로드");
     },
   },
