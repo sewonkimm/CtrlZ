@@ -14,7 +14,7 @@
 
 <script>
 import axios from "axios";
-import PostReview from "@/components/post/postReview.vue";
+import PostReview from "@/components/post/post_Review.vue";
 import "@/components/css/post/post.scss";
 
 axios.defaults.baseURL = "https://i4a202.p.ssafy.io:8888";
