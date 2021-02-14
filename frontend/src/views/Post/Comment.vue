@@ -9,12 +9,14 @@
       :user-name="comment.userId"
       :comment="comment.commentContent"
     />
+    <CommentWrite />
   </div>
 </template>
 <script>
 import Header from "@/components/common/Header.vue";
 import Navigation from "@/components/common/Navigation.vue";
 import PostComment from "@/components/post/PostComment.vue";
+import CommentWrite from "@/components/post/CommentWrite.vue";
 import axios from "axios";
 
 export default {
@@ -23,6 +25,7 @@ export default {
     Header,
     Navigation,
     PostComment,
+    CommentWrite,
   },
   data: () => {
     return {
