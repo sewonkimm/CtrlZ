@@ -17,7 +17,7 @@ import axios from "axios";
 import PostReview from "@/components/post/postReview.vue";
 import "@/components/css/post/post.scss";
 
-axios.defaults.baseURL = "https://i4a202.p.ssafy.io:8888";
+axios.defaults.baseURL = "http://i4a202.p.ssafy.io:8888";
 
 export default {
   name: "Post",
@@ -28,14 +28,16 @@ export default {
     return {
       post: "",
       user: "",
+      postId: "",
     };
   },
   created() {
+    this.postId = this.$route.params.postId;
     axios({
       url: "/post/detail",
       method: "GET",
       params: {
-        postId: "1",
+        postId: this.postId,
       },
     })
       .then((response) => {

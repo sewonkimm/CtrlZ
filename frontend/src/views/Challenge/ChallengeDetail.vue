@@ -94,7 +94,6 @@ export default {
   created() {
     this.userId = this.$store.state.userInfo.userId;
     this.challengeId = this.$route.params.challengeId;
-
     axios({
       url: "/challenge/",
       method: "GET",

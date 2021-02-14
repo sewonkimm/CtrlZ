@@ -48,7 +48,7 @@ const routes = [
         component: ChallengeList,
       },
       {
-        path: "detail",
+        path: "detail/:challengeId",
         name: "ChallengeDetail",
         component: ChallengeDetail,
       },
@@ -65,7 +65,7 @@ const routes = [
     ],
   },
   {
-    path: "/post",
+    path: "/post:postId",
     name: "Post",
     component: Post,
   },
