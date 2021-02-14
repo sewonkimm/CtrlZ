@@ -49,7 +49,7 @@ const routes = [
         component: ChallengeList,
       },
       {
-        path: "detail",
+        path: ":challengeId",
         name: "ChallengeDetail",
         component: ChallengeDetail,
       },
