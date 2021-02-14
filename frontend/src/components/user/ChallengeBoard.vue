@@ -2,7 +2,7 @@
   <div class="challenge">
     <div class="boardHeader">
       <h1>진행중인 챌린지</h1>
-      <p>({{ challenges.length }}개)</p>
+      <p>({{ length }}개)</p>
       <span class="material-icons" @click="onClickExpand">
         {{ expand }}
       </span>
@@ -35,24 +35,34 @@ export default {
     LeafOn,
     LeafOff,
   },
+  props: {
+    length: {
+      type: Number,
+      required: true,
+    },
+    challenges: {
+      type: Array,
+      required: true,
+    },
+  },
   data: () => {
     return {
       expand: "expand_less",
       showBoard: true,
-      challenges: [
-        {
-          challengeId: 1,
-          challengeName: "시작이 반이다",
-          nonAchived: 2,
-          achived: 1,
-        },
-        {
-          challengeId: 2,
-          challengeName: "플라스틱 다이어트",
-          nonAchived: 6,
-          achived: 3,
-        },
-      ],
+      // challenges: [
+      //   {
+      //     challengeId: 1,
+      //     challengeName: "시작이 반이다",
+      //     nonAchived: 2,
+      //     achived: 1,
+      //   },
+      //   {
+      //     challengeId: 2,
+      //     challengeName: "플라스틱 다이어트",
+      //     nonAchived: 6,
+      //     achived: 3,
+      //   },
+      // ],
     };
   },
   methods: {
