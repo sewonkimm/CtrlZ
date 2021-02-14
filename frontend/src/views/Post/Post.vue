@@ -13,11 +13,8 @@
 </template>
 
 <script>
-import axios from "axios";
 import PostReview from "@/components/post/postReview.vue";
 import "@/components/css/post/post.scss";
-
-axios.defaults.baseURL = "http://i4a202.p.ssafy.io:8888";
 
 export default {
   name: "Post",
@@ -33,7 +30,7 @@ export default {
   },
   created() {
     this.postId = this.$route.params.postId;
-    axios({
+    this.$axios({
       url: "/post/detail",
       method: "GET",
       params: {
@@ -43,7 +40,7 @@ export default {
       .then((response) => {
         this.post = response.data;
 
-        axios({
+        this.$axios({
           url: "/user/profile",
           method: "GET",
           params: {

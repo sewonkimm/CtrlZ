@@ -48,9 +48,6 @@ import Navigation from "@/components/common/Navigation.vue";
 import ChallengeTitle from "@/components/challenge/ChallengeTitle.vue";
 import Missions from "@/components/challenge/Missions";
 import "@/components/css/challenge/inProgressChallenge.scss";
-import axios from "axios";
-
-axios.defaults.baseURL = "http://i4a202.p.ssafy.io:8888";
 
 export default {
   name: "InProgressChallenge",
@@ -76,7 +73,7 @@ export default {
     },
   },
   created() {
-    axios({
+    this.$axios({
       url: "/challenge/",
       method: "GET",
       params: {
@@ -85,7 +82,7 @@ export default {
     }).then((response) => {
       this.challenge = response.data;
     });
-    axios({
+    this.$axios({
       url: "/mission/",
       method: "GET",
       params: {
@@ -94,7 +91,7 @@ export default {
     }).then((response) => {
       this.missions = response.data;
     });
-    axios({
+    this.$axios({
       url: "/post/find/challenge/user",
       method: "GET",
       params: {

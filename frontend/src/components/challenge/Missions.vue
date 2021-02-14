@@ -17,19 +17,19 @@
       v-for="(mission, index) in missions"
       :key="mission.missionId"
       class="mission locked"
-      @click="handleMissionClick(index)"
+      @click="handlePostClick(index)"
     >
       <p>
         {{ index + 1 }}
       </p>
     </div>
-    <div v-for="(post, index) in posts" :key="post.postId" @click="handleMissionDetail(index)">
+    <div v-for="(post, index) in posts" :key="post.postId" @click="handleMissionClick(index)">
       <img :src="posts[index].postImage" alt="Thumbnail" class="mission" />
     </div>
+    <!-- 수정 필요 -->
   </div>
 </template>
 <script>
-import axios from "axios";
 import UploadModal from "@/components/common/UploadModal.vue";
 import "@/components/css/challenge/missions.scss";
 
@@ -65,8 +65,8 @@ export default {
     };
   },
   created() {
-    axios({
-      url: "http://i4a202.p.ssafy.io:8888/post/find/challenge/user/",
+    this.$axios({
+      url: "/post/find/challenge/user/",
       method: "GET",
       params: {
         challengeId: this.challengeId,

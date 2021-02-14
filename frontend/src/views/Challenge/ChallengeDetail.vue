@@ -50,14 +50,11 @@
 </template>
 
 <script>
-import axios from "axios";
 import Header from "@/components/common/Header.vue";
 import Navigation from "@/components/common/Navigation.vue";
 import ChallengeTitle from "@/components/challenge/ChallengeTitle.vue";
 import ChallengeFeed from "@/components/challenge/ChallengeFeed.vue";
 import "@/components/css/challenge/challengeDetail.scss";
-
-axios.defaults.baseURL = "http://i4a202.p.ssafy.io:8888";
 
 export default {
   name: "ChallengeDetail",
@@ -94,7 +91,8 @@ export default {
   created() {
     this.userId = this.$store.state.userInfo.userId;
     this.challengeId = this.$route.params.challengeId;
-    axios({
+
+    this.$axios({
       url: "/challenge/",
       method: "GET",
       params: {
@@ -108,7 +106,7 @@ export default {
         console.error(error);
       }); // 해당 챌린지 데이터 조회
 
-    axios({
+    this.$axios({
       url: "/post/find/challenge/",
       method: "GET",
       params: {
@@ -122,7 +120,7 @@ export default {
         console.error(error);
       }); // 해당 챌린지의 모든 게시글 조회
 
-    axios({
+    this.$axios({
       url: "/challenge/status/count/achived",
       method: "GET",
       params: {
@@ -137,7 +135,7 @@ export default {
       }); // 해당 챌린지 완료자 수 조회
 
     if (this.userId > 0) {
-      axios({
+      this.$axios({
         url: `/challenge/status/${this.challengeId}/${this.userId}`,
         method: "GET",
       })
@@ -162,7 +160,7 @@ export default {
   methods: {
     handleStartButton() {
       if (this.userId > 0) {
-        axios({
+        this.$axios({
           url: "/challenge/status/",
           method: "POST",
           data: {

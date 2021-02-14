@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import "@/components/css/post/index.scss";
 import "@/components/css/post/postUpload.scss";
 
@@ -52,14 +51,29 @@ export default {
       formData.append("postContent", vm.postContent);
       formData.append("userId", vm.userId);
       formData.append("challengeId", vm.challengeId);
-      axios
-        .post(`http://i4a202.p.ssafy.io:8888/post`, formData, {
+      this.$axios
+        .post("/post", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         })
         .then((response) => {
-          console.log(response.data);
+          this.$axios({
+            url: `/challenge/status/${this.challengeId}/${this.userId}`,
+            method: "PUT",
+          }).then((response) => {
+            console.log(response);
+          });
+          this.$axios({
+            url: "/user/zscore",
+            method: "PUT",
+            params: {
+              userId: this.userId,
+            },
+          }).then((response) => {
+            console.log(response);
+          });
+          console.log(response);
           alert("업로드 완료");
           this.$router.push("/challenge/inprogress");
         });
