@@ -18,6 +18,7 @@ export default new Vuex.Store({
       rank: [],
       zbtiId: "",
     },
+    zbtiId: "",
   },
   mutations: {
     ENDSPLASH: (state) => {
@@ -42,6 +43,9 @@ export default new Vuex.Store({
     },
     SETRANK: (state, rank) => {
       state.userInfo.rank = rank;
+    },
+    SETZBTI: (state, zbtiId) => {
+      state.zbtiId = zbtiId;
     },
   },
   plugins: [createPersistedState()],

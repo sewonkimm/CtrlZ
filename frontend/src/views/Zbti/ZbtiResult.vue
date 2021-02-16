@@ -28,6 +28,7 @@ export default {
   name: "ZbtiResult",
   data: () => {
     return {
+      userId: "",
       zbtiId: "",
       zbtiResult: {
         zbtiType: "",
@@ -38,25 +39,52 @@ export default {
     };
   },
   created() {
+    this.userId = this.$store.state.userInfo.userId;
     this.zbtiId = this.$route.params.zbtiId;
 
+    this.getZbtiResult();
+    this.setZbtiResult();
+  },
+  methods: {
     // ZBTI 결과 불러오기
-    this.$axios({
-      url: "/zbti/result",
-      method: "GET",
-      params: {
-        zbtiId: this.zbtiId,
-      },
-    })
-      .then((response) => {
-        this.zbtiResult = response.data;
-
-        // 하이라이트 분리
-        this.zbtiResult.zbtiDescription = this.zbtiResult.zbtiDescription.split("\b");
+    getZbtiResult() {
+      this.$axios({
+        url: "/zbti/result",
+        method: "GET",
+        params: {
+          zbtiId: this.zbtiId,
+        },
       })
-      .catch((error) => {
-        console.error(error);
-      });
+        .then((response) => {
+          this.zbtiResult = response.data;
+
+          // 하이라이트 분리
+          this.zbtiResult.zbtiDescription = this.zbtiResult.zbtiDescription.split("\b");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    setZbtiResult() {
+      if (this.userId > 0) {
+        this.$axios({
+          url: "/user/zbti",
+          method: "PUT",
+          data: {
+            userId: this.userId,
+            zbtiId: this.zbtiId,
+          },
+        })
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } else {
+        this.$store.commit("SETZBTI", this.zbtiId);
+      }
+    },
   },
 };
 </script>

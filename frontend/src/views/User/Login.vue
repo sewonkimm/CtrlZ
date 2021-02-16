@@ -9,7 +9,7 @@
 
       <div>
         <label for="password">비밀번호</label>
-        <input id="password" v-model="password" type="password" />
+        <input id="password" v-model="password" type="password" @keyup.enter="login" />
       </div>
     </form>
 
@@ -78,8 +78,8 @@ export default {
           .then((res) => {
             const token = res.data.accesstoken;
             this.$store.commit("LOGIN", token);
-            this.setZScroe(this.$store.state.userInfo.userId);
-            this.setRank(this.$store.state.userInfo.userId);
+
+            this.updateZbtiResult();
             this.$router.push("/");
           })
           .catch((error) => {
@@ -108,8 +108,8 @@ export default {
           }).then((res) => {
             const token = res.data.accesstoken;
             this.$store.commit("LOGIN", token);
-            this.setZScroe(this.$store.state.userInfo.userId);
-            this.setRank(this.$store.state.userInfo.userId);
+
+            this.updateZbtiResult();
             this.$router.push("/");
           });
         })
@@ -117,37 +117,23 @@ export default {
           console.error(error);
         });
     },
-    setZScroe(userId) {
-      // 유저 점수, zbti 조회
-      this.$axios({
-        url: "/user/zscore",
-        method: "GET",
-        params: {
-          userId,
-        },
-      })
-        .then((response) => {
-          this.$store.commit("SETZSCORE", response.data);
+    updateZbtiResult() {
+      if (this.$store.state.zbtiId !== "") {
+        this.$axios({
+          url: "/user/zbti",
+          method: "PUT",
+          data: {
+            userId: this.$store.state.userInfo.userId,
+            zbtiId: this.$store.state.zbtiId,
+          },
         })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
-    setRank(userId) {
-      // 유저의 [등수, 상위 퍼센트]
-      this.$axios({
-        url: "/user/rank",
-        method: "GET",
-        params: {
-          userId,
-        },
-      })
-        .then((response) => {
-          this.$store.commit("SETRANK", response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
     },
   },
 };
