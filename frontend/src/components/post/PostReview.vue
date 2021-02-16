@@ -1,7 +1,7 @@
 <template>
   <div class="postReview">
     <div class="iconWrapper" @click="handleLikeClick">
-      <span class="material-icons" :class="{ greenlike: isActive }">
+      <span class="material-icons" :class="{ green: isActive }">
         eco
       </span>
       <p>
@@ -23,11 +23,6 @@
     </div>
   </div>
 </template>
-<style scoped>
-.material-icons.greenlike {
-  color: #4a6f53;
-}
-</style>
 <script>
 import "@/components/css/post/postReview.scss";
 
