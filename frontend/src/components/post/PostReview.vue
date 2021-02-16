@@ -90,7 +90,6 @@ export default {
           .catch((error) => {
             console.error(error);
           });
-        console.log("POST LIKE");
       } else {
         this.$router.push("/login");
       }
@@ -102,7 +101,6 @@ export default {
           postId: this.postId,
         },
       });
-      console.log("POST COMMENT");
     },
     handleMoreClick() {
       console.log("POST REVIEW MORE");
