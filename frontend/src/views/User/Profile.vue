@@ -92,20 +92,43 @@ export default {
         console.error(error);
       }); // 해당 유저 상위 퍼센트, 등수 조회
 
-    axios({
-      url: "/challenge/status/user",
-      method: "GET",
-      params: {
-        userId: 3,
-      },
-    })
-      .then((response) => {
-        this.userChallenges = response.data;
-        this.length = this.userChallenges.length;
-      })
-      .catch((error) => {
-        console.error(error);
-      }); // 해당 유저 점수 조회
+    if (this.user.zbtiId === "A") {
+      this.user = {
+        ...this.user,
+        zbti: "패션",
+      };
+    } else if (this.user.zbtiId === "B") {
+      this.user = {
+        ...this.user,
+        zbti: "음식",
+      };
+    } else if (this.user.zbtiId === "C") {
+      this.user = {
+        ...this.user,
+        zbti: "일상",
+      };
+    } else if (this.user.zbtiId === "D") {
+      this.user = {
+        ...this.user,
+        zbti: "활동",
+      };
+    }
+
+    // // 진행중인 챌린지 조회
+    // axios({
+    //   url: "/challenge/status/user",
+    //   method: "GET",
+    //   params: {
+    //     userId: 3,
+    //   },
+    // })
+    //   .then((response) => {
+    //     this.userChallenges = response.data;
+    //     this.length = this.userChallenges.length;
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
 
     axios({
       url: "/post/find/user",
