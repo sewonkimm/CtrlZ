@@ -66,6 +66,7 @@ export default {
         });
     },
     setZbtiResult() {
+      // 로그인 후 ZBTI 테스트 하는 경우
       if (this.userId > 0) {
         this.$axios({
           url: "/user/zbti",
@@ -75,13 +76,12 @@ export default {
             zbtiId: this.zbtiId,
           },
         })
-          .then((response) => {
-            console.log(response);
-          })
+          .then(() => {})
           .catch((error) => {
             console.error(error);
           });
       } else {
+        // 로그인안하고 ZBTI 테스트 하는 경우 vuex에 저장
         this.$store.commit("SETZBTI", this.zbtiId);
       }
     },

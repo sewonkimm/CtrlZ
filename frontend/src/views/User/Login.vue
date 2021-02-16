@@ -77,9 +77,9 @@ export default {
         })
           .then((res) => {
             const token = res.data.accesstoken;
-            this.$store.commit("LOGIN", token);
+            this.$store.commit("LOGIN", token); // vuex에 회원정보 저장
 
-            this.updateZbtiResult();
+            this.updateZbtiResult(); // user ZBTI 결과 업데이트
             this.$router.push("/");
           })
           .catch((error) => {
@@ -107,9 +107,9 @@ export default {
             },
           }).then((res) => {
             const token = res.data.accesstoken;
-            this.$store.commit("LOGIN", token);
+            this.$store.commit("LOGIN", token); // vuex에 회원정보 저장
 
-            this.updateZbtiResult();
+            this.updateZbtiResult(); // user ZBTI 결과 업데이트
             this.$router.push("/");
           });
         })
@@ -118,6 +118,7 @@ export default {
         });
     },
     updateZbtiResult() {
+      // ZBTI 테스트 결과가 있는 경우
       if (this.$store.state.zbtiId !== "") {
         this.$axios({
           url: "/user/zbti",

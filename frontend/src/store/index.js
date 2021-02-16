@@ -28,7 +28,7 @@ export default new Vuex.Store({
       const user = jwtDecode(token).user;
       state.userInfo = user;
       if (state.userInfo.userImage === null) {
-        state.userInfo.userImage = "no_profile.png";
+        state.userInfo.userImage = "http://i4a202.p.ssafy.io/img/no_profile.png";
       }
     },
     LOGOUT: (state) => {
