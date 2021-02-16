@@ -10,7 +10,7 @@
     />
     <ZScore :score="user.zscore" :percent="user.rank[1]" :rank="user.rank[0]" :zbti="user.zbti" />
     <ChallengeBoard :length="length" :challenges="userChallenges" />
-    <ZFeed :images="userImages" />
+    <ZFeed :data="feed" />
   </div>
 </template>
 
@@ -44,7 +44,7 @@ export default {
       userRank: [],
       userChallenges: [],
       length: "",
-      userImages: [],
+      feed: [],
     };
   },
   created() {
@@ -92,6 +92,7 @@ export default {
         console.error(error);
       }); // 해당 유저 상위 퍼센트, 등수 조회
 
+    // zbitId에 맞게 zbti 이름 받아오기
     if (this.user.zbtiId === "A") {
       this.user = {
         ...this.user,
@@ -114,6 +115,8 @@ export default {
       };
     }
 
+    this.getFeed();
+
     // // 진행중인 챌린지 조회
     // axios({
     //   url: "/challenge/status/user",
@@ -129,20 +132,24 @@ export default {
     //   .catch((error) => {
     //     console.error(error);
     //   });
-
-    axios({
-      url: "/post/find/user",
-      method: "GET",
-      params: {
-        userId: 3,
-      },
-    })
-      .then((response) => {
-        this.userImages = response.data;
+  },
+  methods: {
+    // 유저가 작성한 게시글 조회
+    getFeed() {
+      this.$axios({
+        url: "/post/find/user",
+        method: "GET",
+        params: {
+          userId: this.user.userId,
+        },
       })
-      .catch((error) => {
-        console.error(error);
-      }); // 해당 유저 post Image 조회
+        .then((response) => {
+          this.feed = response.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
   },
 };
 </script>
