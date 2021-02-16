@@ -9,7 +9,7 @@
       :user-introduce="user.userIntroduce"
     />
     <ZScore :score="user.zscore" :percent="user.rank[1]" :rank="user.rank[0]" :zbti="user.zbti" />
-    <ChallengeBoard :length="length" :challenges="userChallenges" />
+    <ChallengeBoard :challenges="challenges" />
     <ZFeed :data="feed" />
   </div>
 </template>
@@ -38,12 +38,8 @@ export default {
   },
   data: () => {
     return {
-      user: "",
-      userId: "",
-      userScore: "",
-      userRank: [],
-      userChallenges: [],
-      length: "",
+      user: {},
+      challenges: [],
       feed: [],
     };
   },
@@ -115,25 +111,36 @@ export default {
       };
     }
 
+    this.getChallenges();
     this.getFeed();
-
-    // // 진행중인 챌린지 조회
-    // axios({
-    //   url: "/challenge/status/user",
-    //   method: "GET",
-    //   params: {
-    //     userId: 3,
-    //   },
-    // })
-    //   .then((response) => {
-    //     this.userChallenges = response.data;
-    //     this.length = this.userChallenges.length;
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
   },
   methods: {
+    // 진행중인 챌린지 조회
+    getChallenges() {
+      this.$axios({
+        url: "/challenge/status/user",
+        method: "GET",
+        params: {
+          userId: this.user.userId,
+        },
+      })
+        .then((response) => {
+          this.challenges = response.data.map((challengeInfo) => {
+            return {
+              challengeId: challengeInfo.challenge.challengeId,
+              challengeName: challengeInfo.challenge.challengeName,
+              challengeMissionTotal: challengeInfo.challenge.challengeMissionTotal,
+              challengeMissionCurrent: challengeInfo.challengeMissionCurrent,
+              missionNonAchieve:
+                challengeInfo.challenge.challengeMissionTotal -
+                challengeInfo.challengeMissionCurrent,
+            };
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
     // 유저가 작성한 게시글 조회
     getFeed() {
       this.$axios({
