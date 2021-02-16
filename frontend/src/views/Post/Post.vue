@@ -9,7 +9,7 @@
         <span>{{ post.user.userName }}</span>
       </div>
       <img class="postImage" :src="post.postImage" />
-      <PostReview :like-cnt="post.postLike" :comment-cnt="4456" />
+      <PostReview :like-cnt="post.postLike" :comment-cnt="comments.length" :post-id="post.postId" />
       <div class="postContent">
         {{ post.postContent }}
       </div>

@@ -58,14 +58,9 @@ export default {
       postLikeId: "",
     };
   },
-
   created() {
     this.$axios({
-<<<<<<< HEAD
       url: "/post/like/select",
-=======
-      url: "http://localhost:8888/post/like/select",
->>>>>>> 38267d8 (feat: 🍎 PostLike API 연결)
       method: "GET",
       params: {
         postId: this.postId,
