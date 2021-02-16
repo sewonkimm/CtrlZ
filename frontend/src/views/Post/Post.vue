@@ -34,6 +34,7 @@ export default {
     return {
       post: "",
       postId: "",
+      comments: [],
     };
   },
   created() {
@@ -47,6 +48,19 @@ export default {
     })
       .then((response) => {
         this.post = response.data;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    this.$axios({
+      url: "/comment/find",
+      method: "GET",
+      params: {
+        postId: this.$route.params.postId,
+      },
+    })
+      .then((response) => {
+        this.comments = response.data;
       })
       .catch((error) => {
         console.error(error);

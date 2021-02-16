@@ -96,6 +96,12 @@ export default {
       }
     },
     handleCommentClick() {
+      this.$router.push({
+        name: "Comment",
+        params: {
+          postId: this.postId,
+        },
+      });
       console.log("POST COMMENT");
     },
     handleMoreClick() {
