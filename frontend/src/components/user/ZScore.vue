@@ -12,7 +12,7 @@
         상위<span class="percent">{{ percent }}</span> % (<span class="rank">{{ rank }}</span> 등)
       </p>
       <div class="zbtiWrapper">
-        <div v-if="zbtiTest" class="zbtiWrapper">
+        <div v-if="zbti !== ''" class="zbtiWrapper">
           <p>관심영역</p>
           <div :class="['zbti', style]">
             {{ zbti }}
@@ -51,10 +51,9 @@ export default {
   data: () => {
     return {
       style: "",
-      zbtiTest: true,
     };
   },
-  mounted() {
+  created() {
     if (this.zbti === "일상") {
       return (this.style = "yellow");
     }
@@ -66,10 +65,6 @@ export default {
     }
     if (this.zbti === "활동") {
       return (this.style = "blue");
-    }
-
-    if (this.zbti === "") {
-      return (this.zbtiTest = false);
     }
   },
 };

@@ -41,8 +41,12 @@ export default {
   data: () => {
     return {
       user: {},
-      userScore: {},
-      userRank: [],
+      userScore: {
+        zscore: 0,
+        zbtiId: "",
+      },
+      // eslint-disable-next-line prettier/prettier
+      userRank: [ 0, 0 ],
       challenges: [],
       feed: [],
     };
@@ -128,7 +132,9 @@ export default {
         },
       })
         .then((response) => {
-          this.feed = response.data;
+          if (response.data !== "") {
+            this.feed = response.data;
+          }
         })
         .catch((error) => {
           console.error(error);
