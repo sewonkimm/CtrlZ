@@ -5,7 +5,7 @@
     </div>
     <div class="board">
       <span class="zScore">
-        {{ zScore }}
+        {{ score }}
       </span>
       점
       <p class="rank">
@@ -30,7 +30,7 @@
 export default {
   name: "ZScore",
   props: {
-    zScore: {
+    score: {
       type: Number,
       required: true,
     },

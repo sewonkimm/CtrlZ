@@ -2,13 +2,13 @@
   <div class="profile">
     <Header title="마이페이지" />
     <Navigation />
-    <ProfileBoard :user-name="user.userName" :user-introduce="user.userIntroduce" />
-    <ZScore
-      :score="userScore.zScore"
-      :percent="userRank[1]"
-      :rank="userRank[0]"
-      :zbti="userScore.zbti"
+
+    <ProfileBoard
+      :user-name="user.userName"
+      :user-image="user.userImage"
+      :user-introduce="user.userIntroduce"
     />
+    <ZScore :score="user.zscore" :percent="user.rank[1]" :rank="user.rank[0]" :zbti="user.zbti" />
     <ChallengeBoard :length="length" :challenges="userChallenges" />
     <ZFeed :images="userImages" />
   </div>
