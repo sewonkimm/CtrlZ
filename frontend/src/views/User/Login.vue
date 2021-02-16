@@ -78,6 +78,8 @@ export default {
           .then((res) => {
             const token = res.data.accesstoken;
             this.$store.commit("LOGIN", token);
+            this.setZScroe(this.$store.state.userInfo.userId);
+            this.setRank(this.$store.state.userInfo.userId);
             this.$router.push("/");
           })
           .catch((error) => {
@@ -105,8 +107,9 @@ export default {
             },
           }).then((res) => {
             const token = res.data.accesstoken;
-            console.log(token);
             this.$store.commit("LOGIN", token);
+            this.setZScroe(this.$store.state.userInfo.userId);
+            this.setRank(this.$store.state.userInfo.userId);
             this.$router.push("/");
           });
         })

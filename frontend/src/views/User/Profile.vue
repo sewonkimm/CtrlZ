@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import Header from "@/components/common/Header.vue";
 import Navigation from "@/components/common/Navigation.vue";
 import ProfileBoard from "@/components/user/ProfileBoard.vue";
@@ -23,8 +22,6 @@ import ChallengeBoard from "@/components/user/ChallengeBoard.vue";
 import ZScore from "@/components/user/ZScore.vue";
 import ZFeed from "@/components/user/ZFeed.vue";
 import "@/components/css/user/profile.scss";
-
-axios.defaults.baseURL = "http://i4a202.p.ssafy.io:8888";
 
 export default {
   name: "Profile",
@@ -44,49 +41,7 @@ export default {
     };
   },
   created() {
-    this.userId = this.$store.state.userInfo.userId;
-
-    axios({
-      url: "/user/profile",
-      method: "GET",
-      params: {
-        userId: 3,
-      },
-    })
-      .then((response) => {
-        this.user = response.data;
-      })
-      .catch((error) => {
-        console.error(error);
-      }); // 해당 유저 데이터 조회
-
-    axios({
-      url: "/user/zscore",
-      method: "GET",
-      params: {
-        userId: 3,
-      },
-    })
-      .then((response) => {
-        this.userScore = response.data;
-      })
-      .catch((error) => {
-        console.error(error);
-      }); // 해당 유저 점수 조회
-
-    axios({
-      url: "/user/rank",
-      method: "GET",
-      params: {
-        userId: 3,
-      },
-    })
-      .then((response) => {
-        this.userRank = response.data;
-      })
-      .catch((error) => {
-        console.error(error);
-      }); // 해당 유저 상위 퍼센트, 등수 조회
+    this.user = this.$store.state.userInfo;
 
     // zbitId에 맞게 zbti 이름 받아오기
     if (this.user.zbtiId === "A") {
