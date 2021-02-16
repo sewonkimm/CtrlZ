@@ -4,12 +4,12 @@
     <Navigation />
 
     <div class="post">
-      <img class="postImage" :src="post.postImage" />
-      <PostReview :like-cnt="post.postLike" :comment-cnt="4456" />
       <div class="user">
         <img :src="post.user.userImage" class="userImage" />
         <span>{{ post.user.userName }}</span>
       </div>
+      <img class="postImage" :src="post.postImage" />
+      <PostReview :like-cnt="post.postLike" :comment-cnt="4456" />
       <div class="postContent">
         {{ post.postContent }}
       </div>
