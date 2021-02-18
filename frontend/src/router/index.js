@@ -19,6 +19,8 @@ import ZBTI from "../views/Zbti/Zbti.vue";
 import ZbtiIntro from "../views/Zbti/ZbtiIntro.vue";
 import ZbtiTest from "../views/Zbti/ZbtiTest.vue";
 import ZbtiResult from "../views/Zbti/ZbtiResult.vue";
+import Delivery from "../views/Simulation/Delivery.vue";
+import Starbucks from "../views/Simulation/Starbucks.vue";
 
 Vue.use(VueRouter);
 
@@ -123,6 +125,16 @@ const routes = [
         props: true,
       },
     ],
+  },
+  {
+    path: "/delivery",
+    name: "Delivery",
+    component: Delivery,
+  },
+  {
+    path: "/starbucks",
+    name: "Starbucks",
+    component: Starbucks,
   },
 ];
 
