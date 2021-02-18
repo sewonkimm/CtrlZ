@@ -65,7 +65,7 @@ export default {
   computed: {
     progress() {
       return Math.floor(
-        (this.challengeStatus.challengeMissionCurrent / this.challenge.challengeMissionTotal) * 100
+        (100 * this.challengeStatus.challengeMissionCurrent) / this.challenge.challengeMissionTotal
       );
     },
   },
@@ -101,7 +101,7 @@ export default {
     // 현재 사용자의 해당 챌린지 참여 현황 조회
     getUserChallengeStatus() {
       this.$axios({
-        url: `/challenge/status/${this.challengeId}/${this.userId}`,
+        url: `/challenge/status/9/14`,
         method: "GET",
       })
         .then((response) => {
