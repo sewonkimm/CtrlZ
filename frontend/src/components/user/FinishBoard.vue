@@ -1,8 +1,8 @@
 <template>
   <div class="challenge">
     <div class="boardHeader">
-      <h1>�Ϸ�� ç����</h1>
-      <p>({{ challenges.length }}��)</p>
+      <h1>완료된 챌린지</h1>
+      <p>({{ challenges.length }}개)</p>
       <span class="material-icons" @click="onClickExpand">
         {{ expand }}
       </span>
